@@ -1,0 +1,84 @@
+@import "tailwindcss";
+
+:root {
+	color-scheme: dark;
+	--bg: #080b0f;
+	--panel: rgba(12, 17, 22, 0.74);
+	--line: rgba(156, 184, 190, 0.22);
+	--line-hot: rgba(99, 230, 244, 0.58);
+	--text: #e8f2f0;
+	--muted: #8fa2a2;
+	--faint: #526260;
+	--cyan: #63e6f4;
+	--red: #ff5d66;
+	--green: #a8ff9a;
+	--amber: #f4c96b;
+	--shadow: 0 24px 90px rgba(0, 0, 0, 0.42);
+	--mono: "IBM Plex Mono", "SFMono-Regular", Consolas, monospace;
+	--sans: "Aptos", "Segoe UI", "Helvetica Neue", sans-serif;
+
+	background: var(--bg);
+	color: var(--text);
+	font-family: var(--sans);
+	font-synthesis: none;
+	text-rendering: geometricPrecision;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+html {
+	min-width: 320px;
+	background: var(--bg);
+}
+
+body {
+	min-width: 320px;
+	min-height: 100vh;
+	margin: 0;
+	overflow-x: hidden;
+}
+
+#root {
+	min-height: 100vh;
+}
+
+button {
+	cursor: pointer;
+}
+
+@keyframes scan {
+	0% {
+		top: 12%;
+		opacity: 0;
+	}
+
+	10%,
+	80% {
+		opacity: 0.78;
+	}
+
+	100% {
+		top: 88%;
+		opacity: 0;
+	}
+}
+
+@keyframes spin {
+	to {
+		transform: rotate(360deg);
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	*,
+	*::before,
+	*::after {
+		scroll-behavior: auto;
+	}
+
+	.animate-\[scan_4\.2s_linear_infinite\],
+	.animate-\[spin_14s_linear_infinite\],
+	.animate-\[spin_20s_linear_infinite_reverse\] {
+		animation: none;
+	}
+}

@@ -1,6 +1,6 @@
 import type { IconType } from "react-icons";
 
-export type Accent = "cyan" | "green" | "red";
+export type Accent = "amber" | "cyan" | "green" | "red";
 export type NavMessageKey =
 	| "init"
 	| "profile"

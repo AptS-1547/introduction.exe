@@ -51,7 +51,7 @@ describe("content pages", () => {
 		expect(screen.getByText("signal stable")).toBeInTheDocument();
 	});
 
-	it("renders project cards, images, tags, and fallback artwork", () => {
+	it("renders project cards, images, and tags", () => {
 		renderWithAppContext(<ProjectsPage />);
 
 		expect(
@@ -65,7 +65,6 @@ describe("content pages", () => {
 			screen.getByText("AsterDrive - 自托管云存储系统"),
 		).toBeInTheDocument();
 		expect(screen.getByText("gcop-rs - AI Git 助手")).toBeInTheDocument();
-		expect(screen.getAllByText("SIGNAL LOST")).toHaveLength(12);
 		expect(screen.getAllByRole("link")[0]).toHaveAttribute(
 			"href",
 			"/projects/aster-drive",
@@ -102,7 +101,7 @@ describe("content pages", () => {
 		);
 	});
 
-	it("renders project detail fallbacks for missing slugs and missing images", () => {
+	it("renders project detail fallback for missing slugs", () => {
 		const { unmount } = renderWithAppContext(
 			<Routes>
 				<Route path="/projects/:slug" element={<ProjectDetailPage />} />
@@ -128,7 +127,6 @@ describe("content pages", () => {
 			},
 		);
 
-		expect(screen.getAllByText("SIGNAL LOST").length).toBeGreaterThan(0);
 		expect(
 			screen.getByRole("heading", {
 				name: "DNS Orchestrator - DNS 统一管理平台",

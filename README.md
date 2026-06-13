@@ -1,73 +1,114 @@
-# React + TypeScript + Vite
+# introduction.exe
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+AptS:1547 的个人介绍页面。它不是普通的作品集模板，而是一个带启动序列、固定导航、项目档案、世界观入口和联系通道的暗色个人 runtime。
 
-Currently, two official plugins are available:
+## Stack
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- React 19
+- React Router 7
+- TypeScript
+- Vite 8
+- Tailwind CSS 4
+- Framer Motion
+- react-icons
+- Biome
+- Vitest
 
-## React Compiler
+## Pages
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- `/` - INIT runtime dashboard
+- `/profile` - 身份档案、能力图谱和工作倾向
+- `/projects` - 按 GitHub stars 排序的项目索引
+- `/projects/:slug` - 项目详情页
+- `/memory` - The ESAP Project / The Remnant Project 世界观入口
+- `/contact` - 少量但明确的联系入口
 
-## Expanding the ESLint configuration
+## Features
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- Dark-only interface
+- Linux-style boot waterfall animation
+- Desktop fixed left rail and top status bar
+- Mobile bottom tab navigation
+- Chinese / English i18n
+- Project data split into shared metadata and localized copy
+- Real visual assets under `public/images`
+- Reduced-motion compatible rendering tests
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## Development
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+Install dependencies:
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+bun install
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Start the dev server:
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+```bash
+bun run dev
+```
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+Build for production:
+
+```bash
+bun run build
+```
+
+Run tests:
+
+```bash
+bun run test
+```
+
+Run type checking and Biome checks:
+
+```bash
+bun run check
+```
+
+Format and autofix:
+
+```bash
+bun run check:fix
+```
+
+## Project Data
+
+Project metadata lives in:
+
+- `src/data/projects.ts`
+
+Localized project copy lives in:
+
+- `src/data/projects.zh-CN.ts`
+- `src/data/projects.en-US.ts`
+
+Shared metadata includes slug, GitHub URL, language, status key, license, stars, tags, and image path. Localized files only hold display copy such as title, description, long description, feature signals, tech stack notes, performance labels, and status labels.
+
+## Assets
+
+General assets:
+
+- `public/images/general/logo.webp`
+- `public/images/general/avatar.webp`
+
+Memory assets:
+
+- `public/images/memory/ESAP.webp`
+- `public/images/memory/Remnant.webp`
+
+Project assets:
+
+- `public/images/projects/shortlinker.webp`
+
+Missing project visuals intentionally render as `SIGNAL LOST`.
+
+## Verification
+
+Before shipping changes, run:
+
+```bash
+bun run test
+bun run check
+bun run build
 ```

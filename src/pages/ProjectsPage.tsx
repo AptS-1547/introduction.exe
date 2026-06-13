@@ -6,12 +6,14 @@ import { monoCaps, pageTitle } from "../styles/classes";
 import type { Accent } from "../types/content";
 
 const accentClass: Record<Accent, string> = {
+	amber: "after:bg-[var(--amber)]",
 	cyan: "after:bg-[var(--cyan)]",
 	green: "after:bg-[var(--green)]",
 	red: "after:bg-[var(--red)]",
 };
 
 const accentTextClass: Record<Accent, string> = {
+	amber: "text-[var(--amber)]",
 	cyan: "text-[var(--cyan)]",
 	green: "text-[var(--green)]",
 	red: "text-[var(--red)]",

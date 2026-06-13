@@ -6,6 +6,7 @@ export default {
 		"low-maintenance": "不积极维护",
 		"in-development": "开发中",
 		planned: "计划中",
+		archived: "不再维护",
 	},
 	projects: {
 		"dns-orchestrator": {
@@ -648,6 +649,75 @@ export default {
 						{
 							name: "Prettier",
 							purpose: "代码格式化",
+						},
+					],
+				},
+			],
+		},
+		"introduction-exe": {
+			title: "introduction.exe - 个人介绍 runtime",
+			description: "基于 React、Vite 和 Tailwind CSS 构建的暗色个人介绍页面",
+			longDescription:
+				"introduction.exe 是当前这套个人介绍页面，用 React、React Router、Vite 和 Tailwind CSS 构建。它以暗色 runtime 档案为核心视觉，包含 Linux 风格启动瀑布流、固定侧边导航、移动端底部导航、中英双语、个人档案、项目索引、世界观入口和联系通道。",
+			features: [
+				"暗色限定的个人 runtime 视觉系统",
+				"Linux 风格启动瀑布流与会话级启动状态",
+				"桌面端固定侧边栏与顶部状态栏",
+				"移动端 APP 式底部导航",
+				"中英双语内容与语言切换动效",
+				"项目数据按 GitHub stars 排序",
+				"项目元数据与本地化文案分离",
+				"面向 reduced-motion 的组件测试覆盖",
+			],
+			techStack: [
+				{
+					name: "frontend",
+					items: [
+						{
+							name: "React 19",
+							purpose: "页面组件和交互界面",
+						},
+						{
+							name: "React Router 7",
+							purpose: "页面导航与项目详情路由",
+						},
+						{
+							name: "TypeScript",
+							purpose: "项目数据和组件接口的类型约束",
+						},
+						{
+							name: "Tailwind CSS 4",
+							purpose: "暗色视觉系统和响应式布局",
+						},
+					],
+				},
+				{
+					name: "motion",
+					items: [
+						{
+							name: "Framer Motion",
+							purpose: "启动序列、页面切换和语言切换动效",
+						},
+						{
+							name: "react-icons",
+							purpose: "导航、状态和操作图标",
+						},
+					],
+				},
+				{
+					name: "tools",
+					items: [
+						{
+							name: "Vite 8",
+							purpose: "开发服务器和生产构建",
+						},
+						{
+							name: "Vitest",
+							purpose: "组件和页面行为测试",
+						},
+						{
+							name: "Biome",
+							purpose: "代码检查与格式化",
 						},
 					],
 				},

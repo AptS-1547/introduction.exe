@@ -6,6 +6,7 @@ export default {
 		"low-maintenance": "low-maintenance",
 		"in-development": "in-development",
 		planned: "planned",
+		archived: "archived",
 	},
 	projects: {
 		"dns-orchestrator": {
@@ -656,6 +657,77 @@ export default {
 						{
 							name: "Prettier",
 							purpose: "Code formatting",
+						},
+					],
+				},
+			],
+		},
+		"introduction-exe": {
+			title: "introduction.exe",
+			description:
+				"Dark-only personal introduction runtime built with React, Vite, and Tailwind CSS",
+			longDescription:
+				"introduction.exe is the current personal introduction site built with React, React Router, Vite, and Tailwind CSS. It frames the profile as a dark runtime dossier with a Linux-style boot waterfall, fixed desktop navigation, mobile bottom tabs, bilingual content, profile records, a project index, memory archives, and a focused contact channel.",
+			features: [
+				"Dark-only personal runtime visual system",
+				"Linux-style boot waterfall with session-level boot state",
+				"Fixed desktop side rail and top status bar",
+				"Mobile app-like bottom navigation",
+				"Chinese and English content with locale transition motion",
+				"Project data sorted by GitHub stars",
+				"Shared project metadata separated from localized copy",
+				"Reduced-motion aware component test coverage",
+			],
+			techStack: [
+				{
+					name: "frontend",
+					items: [
+						{
+							name: "React 19",
+							purpose: "Page components and interactive interface",
+						},
+						{
+							name: "React Router 7",
+							purpose: "Page navigation and project detail routing",
+						},
+						{
+							name: "TypeScript",
+							purpose: "Type constraints for project data and component APIs",
+						},
+						{
+							name: "Tailwind CSS 4",
+							purpose: "Dark visual system and responsive layout",
+						},
+					],
+				},
+				{
+					name: "motion",
+					items: [
+						{
+							name: "Framer Motion",
+							purpose:
+								"Boot sequence, page transitions, and locale transitions",
+						},
+						{
+							name: "react-icons",
+							purpose: "Navigation, status, and action icons",
+						},
+					],
+				},
+				{
+					name: "tools",
+					items: [
+						{
+							name: "Vite 8",
+							purpose: "Development server and production builds",
+						},
+						{
+							name: "Vitest",
+							purpose: "Component and page behavior tests",
+						},
+						{
+							name: "Biome",
+							purpose: "Code checking and formatting",
 						},
 					],
 				},

@@ -8,7 +8,7 @@ export function ModuleRail() {
 
 	return (
 		<aside
-			className={`fixed top-4 left-[max(1rem,calc((100vw-1440px)/2+1rem))] z-20 hidden h-[calc(100svh-32px)] w-[248px] p-4 min-[921px]:grid min-[921px]:grid-rows-[auto_minmax(0,1fr)_auto] ${glassOverlay}`}
+			className={`fixed top-4 left-[max(1rem,calc((100vw-1440px)/2+1rem))] z-20 hidden h-[calc(100svh-32px)] w-[248px] p-4 min-[1080px]:grid min-[1080px]:grid-rows-[auto_minmax(0,1fr)_auto] ${glassOverlay}`}
 		>
 			<NavLink className="mb-8 flex items-center gap-3" to="/">
 				<span className="grid size-11 shrink-0 place-items-center overflow-hidden bg-[rgba(99,230,244,0.06)] shadow-[0_0_28px_rgba(99,230,244,0.16)]">

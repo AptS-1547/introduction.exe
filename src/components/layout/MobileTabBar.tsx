@@ -8,7 +8,7 @@ export function MobileTabBar() {
 
 	return (
 		<nav
-			className={`fixed right-3 bottom-3 left-3 z-20 grid grid-cols-5 p-1 min-[921px]:hidden ${glassOverlay}`}
+			className={`fixed right-3 bottom-3 left-3 z-20 grid grid-cols-5 p-1 min-[1080px]:hidden ${glassOverlay}`}
 			aria-label="Primary navigation"
 		>
 			{navItems.map((item) => {

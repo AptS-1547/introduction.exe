@@ -21,7 +21,12 @@ type ProjectMetadataShape = {
 	slug: string;
 	githubUrl: string;
 	language: string;
-	status: "active" | "low-maintenance" | "in-development" | "planned";
+	status:
+		| "active"
+		| "low-maintenance"
+		| "in-development"
+		| "planned"
+		| "archived";
 	license: string;
 	stars: number;
 	tags: readonly string[];
@@ -45,6 +50,7 @@ const projectMetadata = [
 			"Desktop App",
 			"Cross-Platform",
 		],
+		image: "/images/projects/dns-orchestrator.webp",
 	},
 	{
 		slug: "gcop-rs",
@@ -54,6 +60,7 @@ const projectMetadata = [
 		license: "MIT",
 		stars: 16,
 		tags: ["Rust", "Git", "AI", "CLI", "Code Review", "LLM"],
+		image: "/images/projects/gcop-rs.webp",
 	},
 	{
 		slug: "shortlinker",
@@ -81,12 +88,13 @@ const projectMetadata = [
 			"S3",
 			"SQLite",
 		],
+		image: "/images/projects/aster-drive.webp",
 	},
 	{
 		slug: "ferrus-gate",
 		githubUrl: "https://github.com/FerrusGate/FerrusGate",
 		language: "Rust",
-		status: "in-development",
+		status: "planned",
 		license: "MIT",
 		stars: 3,
 		tags: ["Rust", "OAuth2", "OIDC", "SAML", "FIDO2", "Authentication"],
@@ -117,15 +125,17 @@ const projectMetadata = [
 		license: "Apache-2.0",
 		stars: 7,
 		tags: ["Python", "FastAPI", "OneBot", "GitHub API", "WebSocket", "Docker"],
+		image: "/images/projects/onebot-github-webhook.webp",
 	},
 	{
 		slug: "vue-portfolio",
 		githubUrl: "https://github.com/AptS-1547/VUE-About-Me",
 		language: "TypeScript",
-		status: "active",
+		status: "archived",
 		license: "MIT",
 		stars: 4,
 		tags: ["Vue.js", "TypeScript", "Tailwind CSS", "Responsive", "Portfolio"],
+		image: "/images/projects/vue-portfolio.webp",
 	},
 	{
 		slug: "wakatime-readme-updater",
@@ -135,6 +145,7 @@ const projectMetadata = [
 		license: "MIT",
 		stars: 2,
 		tags: ["Rust", "WakaTime", "GitHub Actions", "Docker", "Automation"],
+		image: "/images/projects/wakatime-readme-updater.webp",
 	},
 	{
 		slug: "nginx-modsecurity",
@@ -144,6 +155,7 @@ const projectMetadata = [
 		license: "MIT",
 		stars: 10,
 		tags: ["Docker", "Nginx", "ModSecurity", "WAF", "Security", "Alpine"],
+		image: "/images/projects/nginx-modsecurity.webp",
 	},
 	{
 		slug: "acme-docker-reloader",
@@ -153,6 +165,7 @@ const projectMetadata = [
 		license: "MIT",
 		stars: 6,
 		tags: ["Shell", "Docker", "acme.sh", "SSL", "Automation", "systemd"],
+		image: "/images/projects/acme-docker-reloader.webp",
 	},
 	{
 		slug: "aster-pulse",
@@ -163,10 +176,25 @@ const projectMetadata = [
 		stars: 3,
 		tags: ["Rust", "Distributed System", "Monitoring", "Uptime", "Network"],
 	},
+	{
+		slug: "introduction-exe",
+		githubUrl: "https://github.com/AptS-1547/introduction.exe",
+		language: "TypeScript",
+		status: "active",
+		license: "MIT",
+		stars: 1,
+		tags: ["React", "TypeScript", "Vite", "Tailwind CSS", "i18n", "Portfolio"],
+		image: "/images/projects/introduction-exe.webp",
+	},
 ] as const satisfies readonly ProjectMetadataShape[];
 
 export type ProjectSlug = (typeof projectMetadata)[number]["slug"];
-export type ProjectStatus = (typeof projectMetadata)[number]["status"];
+export type ProjectStatus =
+	| "active"
+	| "low-maintenance"
+	| "in-development"
+	| "planned"
+	| "archived";
 type ProjectMetadata = (typeof projectMetadata)[number];
 
 export type ProjectCopy = {
@@ -209,8 +237,12 @@ const projectCatalogs: Record<ProjectLocale, ProjectCopyCatalog> = {
 };
 
 function getAccent(project: ProjectMetadata): Accent {
-	if (project.status === "planned") {
+	if (project.status === "archived") {
 		return "red";
+	}
+
+	if (project.status === "planned") {
+		return "amber";
 	}
 
 	if (project.language === "Rust" || project.status === "active") {

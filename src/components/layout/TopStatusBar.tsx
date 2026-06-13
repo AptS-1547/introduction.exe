@@ -23,13 +23,13 @@ export function TopStatusBar({ onRestartBoot }: TopStatusBarProps) {
 
 	return (
 		<header
-			className={`fixed top-4 right-[max(1rem,calc((100vw-1440px)/2+1rem))] left-[max(1rem,calc((100vw-1440px)/2+1rem))] z-20 flex min-h-[56px] items-center justify-between gap-3 px-4 py-3 max-[620px]:top-2.5 max-[620px]:right-2.5 max-[620px]:left-2.5 max-[620px]:px-3 min-[921px]:left-[max(280px,calc((100vw-1440px)/2+280px))] ${glassOverlay}`}
+			className={`fixed top-4 right-[max(1rem,calc((100vw-1440px)/2+1rem))] left-[max(1rem,calc((100vw-1440px)/2+1rem))] z-20 flex min-h-[56px] items-center justify-between gap-3 px-4 py-3 max-[620px]:top-2.5 max-[620px]:right-2.5 max-[620px]:left-2.5 max-[620px]:px-3 min-[1080px]:left-[max(280px,calc((100vw-1440px)/2+280px))] ${glassOverlay}`}
 		>
 			<div className="grid min-w-0 overflow-hidden">
 				<AnimatePresence initial={false}>
 					<m.div
 						key={`desktop:${statusKey}`}
-						className="col-start-1 row-start-1 hidden min-w-0 items-center gap-2 font-mono text-[0.68rem] tracking-normal text-[var(--faint)] uppercase min-[921px]:flex"
+						className="col-start-1 row-start-1 hidden min-w-0 items-center gap-2 font-mono text-[0.68rem] tracking-normal text-[var(--faint)] uppercase min-[1080px]:flex"
 						initial={
 							reduceMotion
 								? { opacity: 1 }
@@ -50,7 +50,7 @@ export function TopStatusBar({ onRestartBoot }: TopStatusBarProps) {
 						</span>
 					</m.div>
 				</AnimatePresence>
-				<div className="flex items-center gap-3 min-[921px]:hidden">
+				<div className="flex items-center gap-3 min-[1080px]:hidden">
 					<span className="grid size-9 shrink-0 place-items-center overflow-hidden bg-[rgba(99,230,244,0.06)] shadow-[0_0_28px_rgba(99,230,244,0.16)]">
 						<img
 							src="/images/general/logo.webp"

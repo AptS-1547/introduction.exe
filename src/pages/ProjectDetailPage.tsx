@@ -2,15 +2,20 @@ import { FiArrowLeft, FiBox, FiGithub, FiRadio } from "react-icons/fi";
 import { NavLink, useParams } from "react-router";
 import { getProjectBySlug } from "../data/projects";
 import { useI18n } from "../i18n/useI18n";
-import { monoCaps, pageTitle, panelClass } from "../styles/classes";
+import { monoCaps, panelClass } from "../styles/classes";
 import type { Accent } from "../types/content";
 
 const statusBadgeClass: Record<Accent, string> = {
+	amber:
+		"border-[rgba(244,201,107,0.3)] bg-[rgba(244,201,107,0.08)] text-[var(--amber)]",
 	cyan: "border-[rgba(99,230,244,0.28)] bg-[rgba(99,230,244,0.08)] text-[var(--cyan)]",
 	green:
 		"border-[rgba(168,255,154,0.28)] bg-[rgba(168,255,154,0.08)] text-[var(--green)]",
 	red: "border-[rgba(255,93,102,0.28)] bg-[rgba(255,93,102,0.08)] text-[var(--red)]",
 };
+
+const detailTitleClass =
+	"text-[clamp(2rem,4.8vw,4.2rem)] leading-[1.05] font-bold tracking-normal [overflow-wrap:anywhere]";
 
 export function ProjectDetailPage() {
 	const { slug } = useParams();
@@ -63,15 +68,13 @@ export function ProjectDetailPage() {
 						)}
 						<div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(4,8,11,0.06),rgba(4,8,11,0.72)),radial-gradient(circle_at_78%_8%,rgba(99,230,244,0.14),transparent_32%)]" />
 					</div>
-					<div className="grid content-between gap-8 p-5 min-[621px]:p-7">
-						<div>
+					<div className="grid min-w-0 content-between gap-8 p-5 min-[621px]:p-7">
+						<div className="min-w-0">
 							<p className={monoCaps}>
 								<FiBox className="mr-2 inline" />
 								{project.type}
 							</p>
-							<h1 className={`${pageTitle} mt-5 break-words`}>
-								{project.name}
-							</h1>
+							<h1 className={`${detailTitleClass} mt-5`}>{project.name}</h1>
 							<div className="mt-4 flex flex-wrap gap-2">
 								<span
 									className={`border px-2.5 py-1 font-mono text-[0.66rem] uppercase ${statusBadgeClass[project.accent]}`}

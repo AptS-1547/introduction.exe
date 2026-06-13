@@ -13,7 +13,7 @@ export function MemoryPage() {
 					<FiArchive className="mr-2 inline" />
 					archived universes
 				</p>
-				<h2 className={pageTitle}>{messages.memory.title}</h2>
+				<h1 className={pageTitle}>{messages.memory.title}</h1>
 			</div>
 			<div className="grid gap-[18px] min-[1101px]:grid-cols-2">
 				{messages.memory.collections.map((collection) => (
@@ -24,10 +24,9 @@ export function MemoryPage() {
 						<div className="relative aspect-[16/9] overflow-hidden border-b border-[var(--line)] bg-[rgba(4,8,11,0.74)]">
 							<img
 								src={collection.image}
-								alt=""
+								alt={collection.name}
 								className="h-full w-full object-cover opacity-88"
 								loading="lazy"
-								aria-hidden="true"
 							/>
 							<div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(4,8,11,0.08),rgba(4,8,11,0.56)),radial-gradient(circle_at_20%_0%,rgba(99,230,244,0.16),transparent_38%)]" />
 						</div>

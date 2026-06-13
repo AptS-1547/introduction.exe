@@ -31,7 +31,7 @@ describe("layout shell", () => {
 		const onRestartBoot = vi.fn();
 
 		renderWithAppContext(
-			<ShellFrame onRestartBoot={onRestartBoot}>
+			<ShellFrame onRestartBoot={onRestartBoot} runtimeStartedAt={0}>
 				<p>route body</p>
 			</ShellFrame>,
 			{ route: "/memory" },
@@ -48,7 +48,7 @@ describe("layout shell", () => {
 		const toggleLocale = vi.fn();
 		const onRestartBoot = vi.fn();
 		const { context } = renderWithAppContext(
-			<TopStatusBar onRestartBoot={onRestartBoot} />,
+			<TopStatusBar onRestartBoot={onRestartBoot} runtimeStartedAt={0} />,
 			{ context: { toggleLocale }, route: "/projects" },
 		);
 
@@ -75,6 +75,7 @@ describe("layout shell", () => {
 		expect(screen.getByText("personal runtime")).toBeInTheDocument();
 		expect(screen.getAllByText("CONTACT").length).toBeGreaterThan(0);
 		expect(screen.getAllByLabelText("Primary navigation")).toHaveLength(2);
+		expect(screen.getByText("PID")).toBeInTheDocument();
 	});
 
 	it("renders the app shell route and can restart boot", async () => {

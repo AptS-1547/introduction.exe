@@ -1,10 +1,97 @@
-import { NavLink } from "react-router";
+import { useEffect, useRef, useState } from "react";
+import { NavLink, useLocation } from "react-router";
 import { useI18n } from "../../i18n/useI18n";
 import { navItems } from "../../routes/nav";
 import { glassOverlay } from "../../styles/classes";
+import {
+	appendPidSample,
+	getInitialPidState,
+	getPidBarHeight,
+	increasePid,
+	initialPid,
+	pidActivityThrottleMs,
+	pidHistoryStorageKey,
+	pidSignalBars,
+	pidStorageKey,
+	startPidIdleDecay,
+} from "./ModuleRail.utils";
 
 export function ModuleRail() {
 	const { messages } = useI18n();
+	const location = useLocation();
+	const routeKey = `${location.key}:${location.pathname}`;
+	const [{ pid, pidHistory }, setPidState] = useState(getInitialPidState);
+	const lastActivityAtRef = useRef<number | null>(null);
+	if (lastActivityAtRef.current === null) {
+		lastActivityAtRef.current = Date.now();
+	}
+	const lastPidIncreaseAtRef = useRef(0);
+	const previousRouteKeyRef = useRef(routeKey);
+
+	if (previousRouteKeyRef.current !== routeKey) {
+		previousRouteKeyRef.current = routeKey;
+		lastActivityAtRef.current = Date.now();
+		lastPidIncreaseAtRef.current = Date.now();
+		setPidState((current) => {
+			const nextPid = increasePid(current.pid);
+
+			return {
+				pid: nextPid,
+				pidHistory: appendPidSample(current.pidHistory, nextPid),
+			};
+		});
+	}
+
+	useEffect(() => {
+		window.sessionStorage.setItem(pidStorageKey, String(pid));
+	}, [pid]);
+
+	useEffect(() => {
+		window.sessionStorage.setItem(
+			pidHistoryStorageKey,
+			JSON.stringify(pidHistory),
+		);
+	}, [pidHistory]);
+
+	useEffect(() => {
+		const increasePidFromActivity = () => {
+			const now = Date.now();
+
+			lastActivityAtRef.current = now;
+
+			if (now - lastPidIncreaseAtRef.current < pidActivityThrottleMs) {
+				return;
+			}
+
+			lastPidIncreaseAtRef.current = now;
+			setPidState((current) => {
+				const nextPid = increasePid(current.pid);
+
+				return {
+					pid: nextPid,
+					pidHistory: appendPidSample(current.pidHistory, nextPid),
+				};
+			});
+		};
+
+		const markActivity = () => {
+			increasePidFromActivity();
+		};
+
+		window.addEventListener("pointerdown", markActivity, { capture: true });
+		window.addEventListener("keydown", markActivity, { capture: true });
+		window.addEventListener("scroll", markActivity, { passive: true });
+
+		return () => {
+			window.removeEventListener("pointerdown", markActivity, true);
+			window.removeEventListener("keydown", markActivity, true);
+			window.removeEventListener("scroll", markActivity);
+		};
+	}, []);
+
+	useEffect(() => {
+		return startPidIdleDecay(() => lastActivityAtRef.current ?? 0, setPidState);
+	}, []);
 
 	return (
 		<aside
@@ -66,7 +153,33 @@ export function ModuleRail() {
 					);
 				})}
 			</nav>
-			<div className="grid gap-2 border-t border-[rgba(156,184,190,0.14)] pt-4 font-mono text-[0.66rem] tracking-normal text-[var(--faint)] uppercase">
+			<div className="grid gap-3 border-t border-[rgba(156,184,190,0.14)] pt-4 font-mono text-[0.66rem] tracking-normal text-[var(--faint)] uppercase">
+				<div className="grid gap-2 border border-[rgba(99,230,244,0.16)] bg-[rgba(99,230,244,0.035)] p-3">
+					<div className="flex items-center justify-between gap-3">
+						<span>PID</span>
+						<strong className="text-[0.88rem] tracking-normal text-[var(--green)]">
+							{String(pid).padStart(4, "0")}
+						</strong>
+					</div>
+					<div
+						aria-hidden="true"
+						className="grid h-4 grid-cols-12 items-end gap-1 overflow-hidden"
+					>
+						{pidSignalBars.map((bar, index) => {
+							const sampledPid = pidHistory[index] ?? initialPid;
+
+							return (
+								<span
+									key={bar}
+									className="block bg-[var(--cyan)] opacity-35 shadow-[0_0_10px_rgba(99,230,244,0.24)]"
+									style={{
+										height: `${getPidBarHeight(pidHistory, sampledPid)}%`,
+									}}
+								/>
+							);
+						})}
+					</div>
+				</div>
 				<span>{messages.status.runtime}</span>
 				<span>{messages.status.build}</span>
 			</div>

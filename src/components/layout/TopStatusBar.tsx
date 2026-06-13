@@ -1,18 +1,25 @@
 import { AnimatePresence, m, useReducedMotion } from "framer-motion";
+import { useEffect, useState } from "react";
 import { FiRotateCcw } from "react-icons/fi";
 import { useLocation } from "react-router";
 import { useI18n } from "../../i18n/useI18n";
 import { navItems } from "../../routes/nav";
 import { glassButton, glassOverlay } from "../../styles/classes";
+import { formatRuntimeClock, formatRuntimeUptime } from "./TopStatusBar.utils";
 
 type TopStatusBarProps = {
 	onRestartBoot: () => void;
+	runtimeStartedAt: number;
 };
 
-export function TopStatusBar({ onRestartBoot }: TopStatusBarProps) {
+export function TopStatusBar({
+	onRestartBoot,
+	runtimeStartedAt,
+}: TopStatusBarProps) {
 	const location = useLocation();
 	const { messages, toggleLocale } = useI18n();
 	const reduceMotion = useReducedMotion();
+	const [now, setNow] = useState(() => Date.now());
 	const currentItem =
 		navItems.find(
 			(item) =>
@@ -20,6 +27,19 @@ export function TopStatusBar({ onRestartBoot }: TopStatusBarProps) {
 				(item.to !== "/" && location.pathname.startsWith(`${item.to}/`)),
 		) ?? navItems[0];
 	const statusKey = location.pathname;
+	const displayNow = Math.max(now, runtimeStartedAt);
+
+	useEffect(() => {
+		const timer = window.setInterval(() => {
+			setNow(Date.now());
+		}, 1000);
+
+		return () => window.clearInterval(timer);
+	}, []);
+
+	const handleRestartBoot = () => {
+		onRestartBoot();
+	};
 
 	return (
 		<header
@@ -91,10 +111,20 @@ export function TopStatusBar({ onRestartBoot }: TopStatusBarProps) {
 				</div>
 			</div>
 			<div className="flex shrink-0 items-center gap-2">
+				<div className="hidden min-h-10 grid-cols-[auto_auto] items-center gap-x-3 gap-y-0.5 border border-white/10 bg-[rgba(255,255,255,0.026)] px-3 font-mono text-[0.66rem] tracking-normal text-[var(--muted)] min-[760px]:grid">
+					<span className="text-[var(--cyan)]">
+						{formatRuntimeClock(new Date(displayNow))}
+					</span>
+					<span className="text-[var(--faint)] uppercase">local</span>
+					<span className="text-[var(--green)]">
+						{formatRuntimeUptime(displayNow - runtimeStartedAt)}
+					</span>
+					<span className="text-[var(--faint)] uppercase">uptime</span>
+				</div>
 				<button
 					className={`grid min-h-10 min-w-10 place-items-center px-3 font-mono text-[0.72rem] tracking-normal text-[var(--muted)] ${glassButton}`}
 					type="button"
-					onClick={onRestartBoot}
+					onClick={handleRestartBoot}
 					aria-label={messages.actions.restartBoot}
 					title={messages.actions.restartBoot}
 				>

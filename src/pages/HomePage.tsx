@@ -6,10 +6,13 @@ import { TraceLog } from "../components/home/TraceLog";
 import { useI18n } from "../i18n/useI18n";
 
 export function HomePage() {
-	const { messages } = useI18n();
+	const { locale, messages } = useI18n();
 
 	return (
 		<section className="grid gap-[18px]">
+			<h1 className="sr-only">
+				{messages.home.title} - {messages.brand.name}
+			</h1>
 			<div className="grid gap-[18px] min-[1180px]:grid-cols-[minmax(0,0.82fr)_minmax(430px,1.18fr)]">
 				<div className="order-3 mx-auto grid w-full max-w-[840px] gap-[18px] min-[1180px]:order-1 min-[1180px]:max-w-none">
 					<CommandPanel messages={messages} />
@@ -26,7 +29,7 @@ export function HomePage() {
 				<div className="hidden min-[921px]:block">
 					<CurrentSignal messages={messages} />
 				</div>
-				<TraceLog messages={messages} />
+				<TraceLog key={locale} locale={locale} messages={messages} />
 			</div>
 		</section>
 	);

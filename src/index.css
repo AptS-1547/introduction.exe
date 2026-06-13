@@ -69,6 +69,49 @@ button {
 	}
 }
 
+@keyframes signalSweep {
+	0% {
+		transform: translateX(-120%);
+		opacity: 0;
+	}
+
+	20%,
+	78% {
+		opacity: 0.9;
+	}
+
+	100% {
+		transform: translateX(220%);
+		opacity: 0;
+	}
+}
+
+@keyframes statusPulse {
+	0%,
+	100% {
+		opacity: 0.46;
+		transform: scale(0.86);
+	}
+
+	50% {
+		opacity: 1;
+		transform: scale(1.12);
+	}
+}
+
+@keyframes signalBars {
+	0%,
+	100% {
+		opacity: 0.28;
+		transform: scaleY(0.72);
+	}
+
+	50% {
+		opacity: 0.86;
+		transform: scaleY(1);
+	}
+}
+
 @media (prefers-reduced-motion: reduce) {
 	*,
 	*::before,
@@ -77,8 +120,11 @@ button {
 	}
 
 	.animate-\[scan_4\.2s_linear_infinite\],
+	.animate-\[signalBars_2\.6s_ease-in-out_infinite\],
+	.animate-\[signalSweep_2\.8s_ease-in-out_infinite\],
 	.animate-\[spin_14s_linear_infinite\],
-	.animate-\[spin_20s_linear_infinite_reverse\] {
+	.animate-\[spin_20s_linear_infinite_reverse\],
+	.animate-\[statusPulse_2\.4s_ease-in-out_infinite\] {
 		animation: none;
 	}
 }

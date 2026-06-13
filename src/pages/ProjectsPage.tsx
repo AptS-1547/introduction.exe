@@ -27,7 +27,7 @@ export function ProjectsPage() {
 		<section className="grid gap-7">
 			<div className="grid gap-2">
 				<p className={monoCaps}>{messages.projects.eyebrow}</p>
-				<h2 className={pageTitle}>{messages.projects.title}</h2>
+				<h1 className={pageTitle}>{messages.projects.title}</h1>
 			</div>
 			<div className="grid gap-4 min-[921px]:grid-cols-3">
 				{projects.map((project) => (
@@ -41,10 +41,9 @@ export function ProjectsPage() {
 								<>
 									<img
 										src={project.image}
-										alt=""
+										alt={project.name}
 										className="h-full w-full object-cover opacity-90"
 										loading="lazy"
-										aria-hidden="true"
 									/>
 									<div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(4,8,11,0.04),rgba(4,8,11,0.36)),radial-gradient(circle_at_80%_8%,rgba(99,230,244,0.16),transparent_36%)]" />
 								</>

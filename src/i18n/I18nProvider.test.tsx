@@ -103,6 +103,10 @@ describe("messages", () => {
 		expect(messages["zh-CN"].boot.lines).toHaveLength(
 			messages["en-US"].boot.lines.length,
 		);
+		expect(messages["zh-CN"].home.traces.length).toBeGreaterThanOrEqual(100);
+		expect(messages["zh-CN"].home.traces).toHaveLength(
+			messages["en-US"].home.traces.length,
+		);
 		expect(messages["zh-CN"].projects.items.map((item) => item.name)).toEqual(
 			messages["en-US"].projects.items.map((item) => item.name),
 		);

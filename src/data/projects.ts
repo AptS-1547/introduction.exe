@@ -197,6 +197,8 @@ export type ProjectStatus =
 	| "archived";
 type ProjectMetadata = (typeof projectMetadata)[number];
 
+export const projectSlugs = projectMetadata.map((project) => project.slug);
+
 export type ProjectCopy = {
 	title: string;
 	description: string;

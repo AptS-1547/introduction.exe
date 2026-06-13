@@ -4,6 +4,7 @@ import { getProjectBySlug } from "../data/projects";
 import { useI18n } from "../i18n/useI18n";
 import { monoCaps, panelClass } from "../styles/classes";
 import type { Accent } from "../types/content";
+import { NotFoundPage } from "./NotFoundPage";
 
 const statusBadgeClass: Record<Accent, string> = {
 	amber:
@@ -23,23 +24,7 @@ export function ProjectDetailPage() {
 	const project = getProjectBySlug(locale, slug);
 
 	if (!project) {
-		return (
-			<section
-				className={`${panelClass} grid min-h-[420px] place-items-center p-6`}
-			>
-				<div className="grid gap-4 text-center">
-					<p className="font-mono text-[0.8rem] text-[var(--red)] uppercase">
-						SIGNAL LOST
-					</p>
-					<NavLink
-						to="/projects"
-						className="font-mono text-[0.78rem] text-[var(--cyan)] uppercase"
-					>
-						return /projects
-					</NavLink>
-				</div>
-			</section>
-		);
+		return <NotFoundPage variant="project" />;
 	}
 
 	return (
@@ -57,9 +42,8 @@ export function ProjectDetailPage() {
 						{project.image ? (
 							<img
 								src={project.image}
-								alt=""
+								alt={project.name}
 								className="h-full min-h-[360px] w-full object-cover opacity-90"
-								aria-hidden="true"
 							/>
 						) : (
 							<div className="grid h-full min-h-[360px] place-items-center font-mono text-[0.78rem] text-[var(--red)] uppercase">

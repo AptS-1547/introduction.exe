@@ -37,6 +37,11 @@ export function ModuleLauncher({ messages }: ModuleLauncherProps) {
 								</small>
 							</span>
 							<span className="hidden items-center gap-2 font-mono text-[0.66rem] text-[var(--green)] uppercase min-[560px]:flex">
+								<span
+									aria-hidden="true"
+									className="size-1.5 animate-[statusPulse_2.4s_ease-in-out_infinite] rounded-full bg-[var(--green)] shadow-[0_0_12px_rgba(168,255,154,0.5)]"
+									style={{ animationDelay: `${index * 0.28}s` }}
+								/>
 								{moduleStates[index]}
 								<FiArrowUpRight className="text-[var(--muted)] transition group-hover:text-[var(--cyan)]" />
 							</span>

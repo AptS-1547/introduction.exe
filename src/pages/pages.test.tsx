@@ -18,6 +18,7 @@ import { renderWithAppContext } from "../test/render";
 import { ContactPage } from "./ContactPage";
 import { HomePage } from "./HomePage";
 import { MemoryPage } from "./MemoryPage";
+import { NotFoundPage } from "./NotFoundPage";
 import { ProfilePage } from "./ProfilePage";
 import { ProjectDetailPage } from "./ProjectDetailPage";
 import { ProjectsPage } from "./ProjectsPage";
@@ -111,7 +112,11 @@ describe("content pages", () => {
 			},
 		);
 
-		expect(screen.getByText("return /projects")).toHaveAttribute(
+		expect(
+			screen.getByRole("heading", { name: "PROJECT SIGNAL LOST" }),
+		).toBeInTheDocument();
+		expect(screen.getByText("/projects/not-found")).toBeInTheDocument();
+		expect(screen.getByText("返回项目索引")).toHaveAttribute(
 			"href",
 			"/projects",
 		);
@@ -132,6 +137,44 @@ describe("content pages", () => {
 				name: "DNS Orchestrator - DNS 统一管理平台",
 			}),
 		).toBeInTheDocument();
+	});
+
+	it("renders a 404 page for unknown routes", () => {
+		const { container, unmount } = renderWithAppContext(<NotFoundPage />, {
+			locale: "en-US",
+			route: "/unknown/system",
+		});
+
+		expect(
+			screen.getByRole("heading", { name: "404 / SIGNAL LOST" }),
+		).toBeInTheDocument();
+		expect(screen.getByText("/unknown/system")).toBeInTheDocument();
+		expect(screen.getByText("Return to INIT")).toHaveAttribute("href", "/");
+		expect(screen.getByText("View Projects")).toHaveAttribute(
+			"href",
+			"/projects",
+		);
+
+		const firstPattern = Array.from(
+			container.querySelectorAll("[data-active]"),
+			(cell) => cell.getAttribute("data-active"),
+		).join("");
+
+		unmount();
+
+		const { container: secondContainer } = renderWithAppContext(
+			<NotFoundPage />,
+			{
+				locale: "en-US",
+				route: "/sada",
+			},
+		);
+		const secondPattern = Array.from(
+			secondContainer.querySelectorAll("[data-active]"),
+			(cell) => cell.getAttribute("data-active"),
+		).join("");
+
+		expect(secondPattern).not.toBe(firstPattern);
 	});
 
 	it("renders memory archives and timeline entries", () => {

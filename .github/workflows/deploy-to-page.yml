@@ -6,9 +6,12 @@ on:
       - master
     paths:
       - 'src/**'
+      - 'public/**'
+      - 'index.html'
       - 'package.json'
       - '**/*.ts'
       - '**/*.vue'
+      - 'vite.config.ts'
       - '.github/workflows/deploy-to-page.yml'
   workflow_dispatch:
 

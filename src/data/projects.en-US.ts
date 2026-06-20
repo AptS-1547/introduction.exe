@@ -323,6 +323,92 @@ export default {
 				},
 			],
 		},
+		"aster-yggdrasil": {
+			title: "AsterYggdrasil",
+			description:
+				"Self-hosted Minecraft skin site and Yggdrasil/authlib-injector authentication server",
+			longDescription:
+				"AsterYggdrasil is a self-hosted Minecraft skin site and Yggdrasil/authlib-injector authentication server for private Minecraft deployments. It covers site accounts, Minecraft profiles, skins and capes, launcher login, and server join verification, with a Rust backend and React admin/user panel. The project supports single-binary deployment, SQLite/MySQL/PostgreSQL, local/S3/MinIO object storage, runtime config, audit logs, maintenance tasks, and a public texture library.",
+			features: [
+				"Yggdrasil/authlib-injector-compatible protocol root with authenticate, refresh, validate, invalidate, and signout endpoints",
+				"Minecraft join, hasJoined, profile lookup, and hash-based public texture reads",
+				"Separate site accounts and Minecraft profiles, with multiple profiles per account",
+				"Skin and cape uploads with PNG re-encoding, dimension validation, legacy cape compatibility, and profile binding",
+				"Wardrobe texture management plus public texture library submission, review, publishing, copying, reporting, and unpublishing",
+				"Admin and scoped operator workflows for users, profiles, texture moderation, config, audit, tasks, and external auth",
+				"Runtime config for Yggdrasil signing key rotation, captcha policy preview, and scheduled maintenance tasks",
+				"Single-binary deployment with frontend assets embedded into the Rust server via rust-embed",
+			],
+			techStack: [
+				{
+					name: "backend",
+					items: [
+						{
+							name: "Rust 2024",
+							purpose: "Authentication server and service core",
+						},
+						{
+							name: "Actix Web 4",
+							purpose: "HTTP APIs, protocol endpoints, and middleware",
+						},
+						{
+							name: "SeaORM 2",
+							purpose: "SQLite, MySQL, and PostgreSQL data access",
+						},
+						{
+							name: "Tokio",
+							purpose: "Async runtime and background task scheduling",
+						},
+						{
+							name: "jsonwebtoken / rsa",
+							purpose: "Yggdrasil texture signing and token capabilities",
+						},
+					],
+				},
+				{
+					name: "frontend",
+					items: [
+						{
+							name: "React 19",
+							purpose: "Public entry, account panel, and admin console",
+						},
+						{
+							name: "TypeScript",
+							purpose: "Typed frontend service layer and page state",
+						},
+						{
+							name: "Tailwind CSS 4",
+							purpose: "Responsive UI and admin tool styling",
+						},
+						{
+							name: "shadcn/ui",
+							purpose: "Forms, dialogs, tables, and admin operation components",
+						},
+					],
+				},
+				{
+					name: "infrastructure",
+					items: [
+						{
+							name: "rust-embed",
+							purpose: "Embed frontend build output into the server binary",
+						},
+						{
+							name: "local / S3 / MinIO",
+							purpose: "Object storage backends for textures and avatars",
+						},
+						{
+							name: "Redis / memory cache",
+							purpose: "Cache backends and runtime performance",
+						},
+						{
+							name: "Docker",
+							purpose: "Local trial and deployment delivery",
+						},
+					],
+				},
+			],
+		},
 		"ferrus-gate": {
 			title: "Ferrus Gate",
 			description:

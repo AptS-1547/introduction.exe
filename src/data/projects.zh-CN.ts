@@ -320,6 +320,92 @@ export default {
 				},
 			],
 		},
+		"aster-yggdrasil": {
+			title: "AsterYggdrasil - Minecraft 皮肤站与认证服务器",
+			description:
+				"自托管 Minecraft 皮肤站与 Yggdrasil/authlib-injector 认证服务器",
+			longDescription:
+				"AsterYggdrasil 是一个自托管 Minecraft 皮肤站与 Yggdrasil/authlib-injector 认证服务器，面向私有 Minecraft 服务器的账号、玩家档案、皮肤/披风、启动器登录和服务端进服验证链路。项目采用 Rust 后端与 React 前端面板，支持单二进制部署、SQLite/MySQL/PostgreSQL、local/S3/MinIO 对象存储、运行时配置、审计日志、后台维护任务和公共材质库。",
+			features: [
+				"提供 Yggdrasil/authlib-injector 兼容协议根路径与认证、刷新、校验、失效和 signout 端点",
+				"支持 Minecraft join、hasJoined、profile 查询和 hash 化公开材质读取",
+				"站点账号与 Minecraft profile 分离建模，一个账号可拥有多个 profile",
+				"支持 skin/cape 上传、PNG 重编码、尺寸校验、旧式 cape 兼容和材质绑定",
+				"内置 wardrobe 材质管理与公共材质库提交、审核、发布、复制、举报和下架流程",
+				"管理员与分权 operator 工作流覆盖用户、profile、材质审核、配置、审计、任务和外部认证",
+				"运行时配置支持 Yggdrasil 签名密钥轮换、验证码策略预览和周期维护任务",
+				"单二进制部署，前端面板通过 rust-embed 嵌入 Rust 服务端",
+			],
+			techStack: [
+				{
+					name: "backend",
+					items: [
+						{
+							name: "Rust 2024",
+							purpose: "认证服务器和业务服务核心",
+						},
+						{
+							name: "Actix Web 4",
+							purpose: "HTTP API、协议端点和中间件",
+						},
+						{
+							name: "SeaORM 2",
+							purpose: "SQLite、MySQL 和 PostgreSQL 数据访问",
+						},
+						{
+							name: "Tokio",
+							purpose: "异步运行时和后台任务调度",
+						},
+						{
+							name: "jsonwebtoken / rsa",
+							purpose: "Yggdrasil 材质签名和认证令牌能力",
+						},
+					],
+				},
+				{
+					name: "frontend",
+					items: [
+						{
+							name: "React 19",
+							purpose: "用户入口、账号面板和管理后台",
+						},
+						{
+							name: "TypeScript",
+							purpose: "前端服务层和页面状态类型约束",
+						},
+						{
+							name: "Tailwind CSS 4",
+							purpose: "响应式界面和管理工具样式",
+						},
+						{
+							name: "shadcn/ui",
+							purpose: "表单、对话框、表格和后台操作组件",
+						},
+					],
+				},
+				{
+					name: "infrastructure",
+					items: [
+						{
+							name: "rust-embed",
+							purpose: "将前端构建产物嵌入服务端二进制",
+						},
+						{
+							name: "local / S3 / MinIO",
+							purpose: "材质和头像对象存储后端",
+						},
+						{
+							name: "Redis / memory cache",
+							purpose: "缓存后端和运行时性能优化",
+						},
+						{
+							name: "Docker",
+							purpose: "本地试跑和部署交付",
+						},
+					],
+				},
+			],
+		},
 		"ferrus-gate": {
 			title: "Ferrus Gate - 身份网关",
 			description: "支持 OAuth2、OIDC、SAML 和 FIDO2 的现代身份网关",
